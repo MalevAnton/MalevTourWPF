@@ -1,0 +1,117 @@
+﻿<Page x:Class="ToruMalev.Pages.ShowHotelPage"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:ToruMalev.Pages"
+      mc:Ignorable="d" 
+      d:DesignHeight="450" d:DesignWidth="1500"
+      Title="ShowHotelPage" FontSize="30">
+
+    <Page.Resources>
+        <BitmapImage x:Key="defaultImage" UriSource="pack://application:,,,/Banners/picture.png"/>
+    </Page.Resources>
+
+    <Grid>
+
+        <Grid.RowDefinitions>
+
+            <RowDefinition></RowDefinition>
+
+            <RowDefinition Height="0*"></RowDefinition>
+
+            <RowDefinition Height="0*"></RowDefinition>
+
+        </Grid.RowDefinitions>
+
+        <StackPanel>
+
+            <StackPanel>
+
+                <StackPanel>
+
+                    <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
+
+                        <TextBlock Name="txtblock_Poisk">Ввдеите текст для поиска:</TextBlock>
+
+                        <TextBox Name="txtbox_Poisk" TextChanged="txtbox_Poisk_TextChanged" Height="35" FontSize="18" Width="300"></TextBox>
+
+                    </StackPanel>
+
+                    <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Margin="158, 15, 0, 0">
+
+                        <TextBlock>Выберите тип:</TextBlock>
+
+                        <ComboBox Name="cmbTips" SelectionChanged="cmbTips_SelectionChanged_1" Width="300">
+
+                            <ComboBoxItem>Все типы</ComboBoxItem>
+
+                        </ComboBox>
+
+
+                    </StackPanel>
+
+                    <StackPanel>
+
+                        <CheckBox Name="cbActual" Checked="cbActual_Checked" Unchecked="cbActual_Checked" HorizontalAlignment="Center" FontSize="30">только актуальные туры</CheckBox>
+
+                    </StackPanel>
+
+                </StackPanel>
+
+                <ListView Name="listHotel" ScrollViewer.HorizontalScrollBarVisibility="Disabled" Height="500">
+
+                    <ListView.ItemsPanel>
+
+                        <ItemsPanelTemplate>
+
+                            <WrapPanel></WrapPanel>
+
+                        </ItemsPanelTemplate>
+
+                    </ListView.ItemsPanel>
+
+                    <ListView.ItemTemplate>
+
+                        <DataTemplate>
+
+                            <Border Padding="5" CornerRadius="5" BorderThickness="1" BorderBrush="#445c93">
+
+                                <Grid Name="gridMain" Width="500" Height="500" Background="{ Binding TourColor }">
+
+                                    <StackPanel>
+
+                                        <TextBlock Text="{ Binding Name_Tour }" HorizontalAlignment="Center"/>
+
+                                        <Image Width="300" Height="200" Source="{ Binding ImagePreview, FallbackValue = { StaticResource defaultImage }, TargetNullValue = { StaticResource defaultImage } }"></Image>
+
+                                        <TextBlock TextAlignment="Center" FontWeight="Bold" Text="{ Binding Price, StringFormat=0 РУБ }" FontSize="18"></TextBlock>
+
+                                        <DockPanel>
+
+                                            <TextBlock Text="{ Binding Is_ActualText }" HorizontalAlignment="Left" Foreground="{ Binding Is_ActualColor }"></TextBlock>
+                                            <TextBlock Text="{ Binding Ticket_Count, StringFormat=Билетов: {0} }" HorizontalAlignment="Right"></TextBlock>
+
+                                        </DockPanel>
+
+                                    </StackPanel>
+
+                                </Grid>
+
+                            </Border>
+
+                        </DataTemplate>
+
+                    </ListView.ItemTemplate>
+
+                </ListView>
+
+            </StackPanel>
+
+            <Button Name="btnHotel" Content="Список отелей" Click="btnHotel_Click"></Button>
+
+        </StackPanel>
+
+    </Grid>
+
+</Page>
